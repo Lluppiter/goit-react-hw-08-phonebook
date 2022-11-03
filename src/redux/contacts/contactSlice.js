@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getContacts, deleteContact, addContact } from './contactOperations';
+import {
+  getContacts,
+  deleteContact,
+  addContact,
+  changeContact,
+} from './contactOperations';
 
 const initialState = {
   contacts: [],
@@ -17,6 +22,7 @@ const contactSlice = createSlice({
     [getContacts.fulfilled]: (state, { payload }) => {
       state.contacts = payload;
       state.isLoading = false;
+      state.isShown = true;
     },
     [getContacts.rejected]: (state, { payload }) => {
       state.error = payload;

@@ -16,8 +16,6 @@ code {
 }
 
 #root {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 50px;
+  background-color: #e8f0ff;
+  height: 100vh;
 }

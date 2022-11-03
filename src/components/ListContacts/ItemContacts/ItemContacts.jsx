@@ -1,28 +1,16 @@
 import styles from '../ItemContacts/ItemContacts.module.css';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact, getContacts } from 'redux/contacts/contactOperations';
-import { selectVisibleContacts } from 'redux/contacts/contactSelector';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from 'redux/contacts/contactOperations';
 
-export const ItemContacts = () => {
-  const [isShown, setIsShown] = useState(false);
-
-  const visibleContacts = useSelector(selectVisibleContacts);
+export const ItemContacts = ({ visibleContacts }) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!isShown) {
-      setIsShown(true);
-      dispatch(getContacts());
-    }
-  }, [isShown, dispatch]);
 
   return (
     <>
       {visibleContacts.map(({ id, name, number }) => (
         <li key={id} id={id} className={styles.listItem}>
           <p className={styles.itemText}>
-            {name}: {number}
+            <span>{name}</span>:<span>{number}</span>
           </p>
           <button
             className={styles.itemBtn}
@@ -32,7 +20,7 @@ export const ItemContacts = () => {
               dispatch(deleteContact(id));
             }}
           >
-            &#215;
+            X
           </button>
         </li>
       ))}
